@@ -1,3 +1,5 @@
+# Quark :]
+
 ```
  ________  ___  ___  ________  ________  ___  __       
 |\   __  \|\  \|\  \|\   __  \|\   __  \|\  \|\  \     
@@ -10,7 +12,7 @@
                 
 ```
 
-Quark :], is a simple server writing in python using flask, thinking to use in linux containers world
+Quark is a simple server writing in python using flask, thinking to use in linux containers world
 
 ### Build
 
