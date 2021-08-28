@@ -1,11 +1,16 @@
-# Quark :]
+```
+ ________  ___  ___  ________  ________  ___  __       
+|\   __  \|\  \|\  \|\   __  \|\   __  \|\  \|\  \     
+\ \  \|\  \ \  \\\  \ \  \|\  \ \  \|\  \ \  \/  /|_   
+ \ \  \\\  \ \  \\\  \ \   __  \ \   _  _\ \   ___  \  
+  \ \  \\\  \ \  \\\  \ \  \ \  \ \  \\  \\ \  \\ \  \ 
+   \ \_____  \ \_______\ \__\ \__\ \__\\ _\\ \__\\ \__\
+    \|___| \__\|_______|\|__|\|__|\|__|\|__|\|__| \|__|
+          \|__|                                        
+                
+```
 
-Reference-style: 
-![alt text][quark-cowsay]
-
-[quark-cowsay]: https://github.com/gonzaloacosta/quark-server/raw/master/images/quark-cowsay.png "Quark Cowsay"
-
-Quark is a simple server writing in python flask to use in linux containers world :]
+Quark :], is a simple server writing in python using flask, thinking to use in linux containers world
 
 ### Build
 
