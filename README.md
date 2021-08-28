@@ -35,14 +35,14 @@ Welcome home paga have all the amazing *remember notes!*
 - **Hello World** `/hello`
 
 ```bash
-curl http://<address>:<port>/hello
+curl http://localhost:8080/hello
 ```
 - **Version** `/version`
 
 Version number of this awesome quark server ;)
 
 ```bash
-curl http://<simple-webserver>/version
+curl http://localhost:8080/version
 ```
 
 - **Date** `/date`
@@ -50,14 +50,14 @@ curl http://<simple-webserver>/version
 Return date time
 
 ```
-curl http://<address>:<port>/date
+curl http://localhost:8080/date
 ```
 - **Health Check** `/healthz`
 
 Health check usefull to readiness and liveness probes. Return `ok` is everythings it's ok and `no` there is a problem.
 
 ```bash
-curl http://<address>:<port>/healthz
+curl http://localhost:8080/healthz
 ```
 
 - **Sleep** `/sleep/<num>`
