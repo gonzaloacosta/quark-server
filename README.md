@@ -65,7 +65,7 @@ curl http://localhost:8080/healthz
 Return `num` seconds to response.
 
 ```bash
-curl http://<simple-webserver>/sleep/5
+curl http://localhost:8080/sleep/5
 ```
 
 - **Inject error** `/error`
@@ -73,7 +73,7 @@ curl http://<simple-webserver>/sleep/5
 Return an 503 error
 
 ```bash
-curl http://<simple-webserver>/error
+curl http://localhost:8080/error
 ```
 
 - **Test TCP** `/tcp/?host=<hostname|address>&port=<port>`
