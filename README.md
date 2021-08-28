@@ -16,51 +16,16 @@ docker run --rm -d --name quark-server -p 8080:8080 gonzaloacosta/quark-server
 
 ## Context Path
 
-### Home `/`
+- **Home** `/`
+
+Welcome home paga have all the amazing *remember notes!*
+
+- **Hello World** `/hello`
 
 ```bash
-curl http://<simple-webserver>/
+curl http://<address>:<port>/hello
 ```
-
-### Health Check `/healthz`
-
-Health check usefull to readiness and liveness probes. Return `ok` is everythings it's ok and `no` there is a problem.
-
-```bash
-curl http://<simple-webserver>/healthz
-```
-
-### Hello World `/hello`
-
-```bash
-curl http://<simple-webserver>/hello
-```
-
-### Today `/date`
-
-Return date time
-
-```
-curl http://<simple-webserver>/date
-```
-
-### Sleep `/sleep/<num>`
-
-Return `num` seconds to response.
-
-```bash
-curl http://<simple-webserver>/sleep/5
-```
-
-### Inject error `/error`
-
-Return an 503 error
-
-```bash
-curl http://<simple-webserver>/error
-```
-
-### Version `/version`
+- **Version** `/version`
 
 Version number of this awesome quark server ;)
 
@@ -68,7 +33,38 @@ Version number of this awesome quark server ;)
 curl http://<simple-webserver>/version
 ```
 
-### Test TCP `/tcp/?host=<hostname|address>&port=<port>`
+- **Date** `/date`
+
+Return date time
+
+```
+curl http://<address>:<port>/date
+```
+- **Health Check** `/healthz`
+
+Health check usefull to readiness and liveness probes. Return `ok` is everythings it's ok and `no` there is a problem.
+
+```bash
+curl http://<address>:<port>/healthz
+```
+
+- **Sleep** `/sleep/<num>`
+
+Return `num` seconds to response.
+
+```bash
+curl http://<simple-webserver>/sleep/5
+```
+
+- **Inject error** `/error`
+
+Return an 503 error
+
+```bash
+curl http://<simple-webserver>/error
+```
+
+- **Test TCP** `/tcp/?host=<hostname|address>&port=<port>`
 
 Usefull to reach a tcp layer 4 services.
 
@@ -76,7 +72,7 @@ Usefull to reach a tcp layer 4 services.
 curl http://localhost:8080/testconn?type=pass&host=google.com&port=80
 ```
 
-### Forward `/forward?type=pass&host=<hostname|address>&port=<port>`
+- **Forward** `/forward?type=pass&host=<hostname|address>&port=<port>`
 
 Usefull tool to reach a http services in chain.
 
@@ -87,7 +83,7 @@ Usefull tool to reach a http services in chain.
 curl http://localhost:8080/forward?type=<passs|end>&host=<another_services>&port=8080
 ```
 
-### URL `/url?host=<hostname|address>&port=<port>`
+- **URL** `/url?host=<hostname|address>&port=<port>`
 
 Similar to another scenario but in this case use the [Zipkins headers](https://github.com/openzipkin/b3-propagation) to propagation headers.
 
@@ -95,7 +91,7 @@ Similar to another scenario but in this case use the [Zipkins headers](https://g
 curl http://localhost:8080/url?host=<another_services>&port=8080
 ```
 
-### URL `/logger/<num>
+- **Logger** `/logger/<num>
 
 Logger in stander output the amount of second that you define in `num`.
 
@@ -104,7 +100,7 @@ Logger in stander output the amount of second that you define in `num`.
 curl http://localhost:8080/logger/<num>
 ```
 
-### Logging `/logging?iteration=<number>&file=</path/to/file.log>`
+- **Logging** `/logging?iteration=<number>&file=</path/to/file.log>`
 
 TODO: Logging in a file some of text or iteration. The job will be create the path and write the secuence in a indicated file
 
@@ -112,11 +108,11 @@ TODO: Logging in a file some of text or iteration. The job will be create the pa
 curl http://localhost:8080/logging?iteration=<number>&file=</path/to/file.log>
 ```
 
-### Metrics `/metrics`
+- **Metrics** `/metrics`
 
 TODO: Enable prometheus metrics and defined counter, gauges and histograms to monitor the application.
 
-### Load Average `/load/<cpu|mem>`
+- **Load Average** `/load/<cpu|mem>`
 
 TODO: Start a Job to consume a lot of cpu or memory to reach limits and request
 
@@ -126,4 +122,4 @@ curl http://localhost:8080/load/<cpu|mem>
 
 ## Contact
 
-### Gonzalo Acosta <gonzaloacostapeiro@gmail.com>
+- **Gonzalo Acosta** <gonzaloacostapeiro@gmail.com>
