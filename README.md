@@ -1,5 +1,10 @@
 # Quark :]
 
+Reference-style: 
+![alt text][quark-cowsay]
+
+[quark-cowsay]: https://github.com/gonzaloacosta/quark-server/raw/master/images/quark-cowsay.png "Quark Cowsay"
+
 Quark is a simple server writing in python flask to use in linux containers world :]
 
 ### Build
