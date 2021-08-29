@@ -1,0 +1,13 @@
+__pycache__/*
+.git
+.DS_Store
+.gitignore
+Dockerfile
+docker-compose.yaml
+docker-compose.yml
+README.md
+env.*
+*.csv
+/tmp/*
+venv/*
+database.db

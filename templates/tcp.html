@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Check Socker TCP {% endblock %}</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="Host">Host</label>
+        <input type="text" name="host"
+               placeholder="Host address" class="form-control"
+               value="{{ request.form['host'] }}"></input>
+    </div>
+    <div class="form-group">
+        <label for="Port">Port</label>
+        <input type="Port" name="port"
+               placeholder="Port" class="form-control"
+               value="{{ request.form['port'] }}"></input>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% endblock %}

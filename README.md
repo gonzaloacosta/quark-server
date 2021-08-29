@@ -17,119 +17,55 @@ Quark is a simple server writing in python using flask, thinking to use in linux
 ### Build
 
 ```bash
-docker build --no-cache -t quark-server .
+docker build --no-cache -t gonzaloacosta/quark-server:0.0.2 .
 ```
 
 ### Run
 
 ```bash
-docker run --rm -d --name quark-server -p 8080:8080 gonzaloacosta/quark-server 
+docker run --rm -d --name quark-server -p 8080:8080 gonzaloacosta/quark-server:v0.0.2
 ```
 
-## Context Path
+## Quark :] short post!
 
-- **Home** `/`
+- [x] **Home** `/`
+- [x] **New Post** `/create`
+- [x] **View Post** `/<post_id>`
+- [x] **Edit Post** `/<post_id>/edit`
+- [x] **Delete Post** `/<post_id>/delete`
+- [ ] **External DB Mongo**, for users.
+- [ ] **External Redis** for sessions
+- [ ] **Loging**, add loging web page
 
-Welcome home paga have all the amazing *remember notes!*
+## Another funtionalities
 
-- **Hello World** `/hello`
+- [x] **Healthz** `/healthz`, Usefull for readiness and liveness probe.
+- [x] **Sleep** `/sleep/<num>`, Introduce and sleep `<num>` time in secods in the request.
+- [x] **Inject error** `/error`, Inject an error 503.
+- [x] **Check TCP** `/tcp/`, Complete field with `<host>` and `<port>` to test.
+- [/] **Forward** `/forward?type=pass&host=<hostname|address>&port=<port>`. Usefull to forward a request, TODO build the web page with form.
+  - `type=pass`: try to reach another services defined in parameters `host` and `port`
+  - `type=end`: finalize the chain services.
+- [/] **URL** `/url?host=<hostname|address>&port=<port>`, Similar to another scenario but in this case use the [Zipkins headers](https://github.com/openzipkin/b3-propagation) to propagation headers.
+- [x] **Logger** `/logger/<num>`, Print a secuence of number until `<num>` in stdout.
+- [ ] **Logging** `/logging?iteration=<number>&file=</path/to/file.log>`, TODO the idea is write in a file some of logs.
+- [/] **Prometheus Metrics** `/metrics`, Define counter, histograms, summarys, gauges to defined SLI, SLO and SLA 
+- [ ] **CPU/Mem Generator** `/load/<cpu|mem>`, simulate cpu and memory generator.
+
+### Run application without containers
+
+- **UWS**
 
 ```bash
-curl http://localhost:8080/hello
+uwsgi --http localhost:8080 --wsgi-file server.py --callable app
 ```
-- **Version** `/version`
 
-Version number of this awesome quark server ;)
+- **Flask**
 
 ```bash
-curl http://localhost:8080/version
-```
-
-- **Date** `/date`
-
-Return date time
-
-```
-curl http://localhost:8080/date
-```
-- **Health Check** `/healthz`
-
-Health check usefull to readiness and liveness probes. Return `ok` is everythings it's ok and `no` there is a problem.
-
-```bash
-curl http://localhost:8080/healthz
-```
-
-- **Sleep** `/sleep/<num>`
-
-Return `num` seconds to response.
-
-```bash
-curl http://localhost:8080/sleep/5
-```
-
-- **Inject error** `/error`
-
-Return an 503 error
-
-```bash
-curl http://localhost:8080/error
-```
-
-- **Test TCP** `/tcp/?host=<hostname|address>&port=<port>`
-
-Usefull to reach a tcp layer 4 services.
-
-```bash
-curl http://localhost:8080/testconn?type=pass&host=google.com&port=80
-```
-
-- **Forward** `/forward?type=pass&host=<hostname|address>&port=<port>`
-
-Usefull tool to reach a http services in chain.
-
-* `type=pass`: try to reach another services defined in parameters `host` and `port`
-* `type=end`: finalize the chain services.
-
-```
-curl http://localhost:8080/forward?type=<passs|end>&host=<another_services>&port=8080
-```
-
-- **URL** `/url?host=<hostname|address>&port=<port>`
-
-Similar to another scenario but in this case use the [Zipkins headers](https://github.com/openzipkin/b3-propagation) to propagation headers.
-
-```bash
-curl http://localhost:8080/url?host=<another_services>&port=8080
-```
-
-- **Logger** `/logger/<num>
-
-Logger in stander output the amount of second that you define in `num`.
-
-
-```bash
-curl http://localhost:8080/logger/<num>
-```
-
-- **Logging** `/logging?iteration=<number>&file=</path/to/file.log>`
-
-TODO: Logging in a file some of text or iteration. The job will be create the path and write the secuence in a indicated file
-
-```bash
-curl http://localhost:8080/logging?iteration=<number>&file=</path/to/file.log>
-```
-
-- **Metrics** `/metrics`
-
-TODO: Enable prometheus metrics and defined counter, gauges and histograms to monitor the application.
-
-- **Load Average** `/load/<cpu|mem>`
-
-TODO: Start a Job to consume a lot of cpu or memory to reach limits and request
-
-```bash
-curl http://localhost:8080/load/<cpu|mem>
+export FLASK_APP=server
+export FLASK_ENVIRONMENT=development
+flask run -p 8080
 ```
 
 ## Contact

@@ -18,22 +18,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('get_tcp')}}">TCP</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('create')}}">New Post</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('get_url')}}">URL</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/tcp">Test TCP</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
+                <a class="nav-link" href="/metrics">Metrics</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
             </ul>
         </div>
     </nav>
     <div class="container">
-        {% block content %} {% endblock %}
+      {% for category, message in get_flashed_messages(with_categories=True) %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+      {% block content %} {% endblock %}
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
