@@ -5,3 +5,18 @@ h1 {
     padding: 10px;
 }
 
+.alert-error {
+  background-color: red;
+  color: white;
+}
+
+.alert-warning {
+  background-color: yellow;
+  color: black;
+}
+
+.alert-info {
+  background-color: green;
+  color: black;
+}
+

@@ -1,2 +1,4 @@
 flask
+uwsgi
 requests
+prometheus_client

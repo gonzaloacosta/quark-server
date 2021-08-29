@@ -1,3 +1,0 @@
-export HOSTNAME=proton
-export VERSION=v1
-export SLEEP_TIME=5

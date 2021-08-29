@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Quak :] Remembering post.. {% endblock %}</h1>
+    <h1>{% block title %} Quak :] short notes. {% endblock %}</h1>
     {% for post in posts %}
-        <a href="#">
+        <a href="{{ url_for('post', post_id=post['id']) }}">
             <h2>{{ post['title'] }}</h2>
         </a>
         <span class="badge badge-primary">{{ post['created'] }}</span>
-        <hr>
-        {{ post['content'] }}<hr>
+        <a href="{{ url_for('edit', id=post['id']) }}">
+            <span class="badge badge-warning">Edit</span>
+        </a>
+        <hr>{{ post['content'] }}<hr>
     {% endfor %}
 {% endblock %}
 
