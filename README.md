@@ -17,13 +17,13 @@ Quark is a simple server writing in python using flask, thinking to use in linux
 ### Build
 
 ```bash
-docker build --no-cache -t gonzaloacosta/quark-server:0.0.2 .
+docker build --no-cache -t gonzaloacosta/quark-server:python3.8-alpine .
 ```
 
 ### Run
 
 ```bash
-docker run --rm -d --name quark-server -p 8080:8080 gonzaloacosta/quark-server:v0.0.2
+docker run --rm -d --name quark-server -p 8080:80 gonzaloacosta/quark-server:python3.8-alpine
 ```
 
 ## Quark :] short post!

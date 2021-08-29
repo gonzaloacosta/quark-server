@@ -4,6 +4,7 @@ import logging
 import socket
 import sqlite3
 import requests
+import validators
 from flask import Flask, request, render_template, url_for, flash, redirect
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
@@ -83,8 +84,8 @@ def edit(id):
         else:
             conn = get_db_connection()
             conn.execute('UPDATE posts SET title = ?, content = ?'
-                         ' WHERE id = ?',
-                         (title, content, id))
+                        ' WHERE id = ?',
+                        (title, content, id))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
@@ -106,13 +107,12 @@ def delete(id):
 
 @app.route("/tcp", methods=('GET', 'POST',))
 def tcp_check():
-    """ Check TCP Socker is Open and return a message   """
+    """ Check TCP Socket is open and return a flash message   """
     message = "Please complete ip addres and port"
 
     if request.method == 'POST':
         host = request.form['host']
         port = request.form['port']
-
         if not host or not port:
             flash('Host and port is required!', 'warning')
         else:
@@ -125,7 +125,7 @@ def tcp_check():
                 message = "Successfull tcp connetion: {}:{}".format(host, port)
                 flash(message, 'info')
 
-    return render_template('tcp.html')
+    return render_template('tcp.html', title="Check socket TCP")
 
 
 def socket_check(host, port):
@@ -149,29 +149,33 @@ def build_cow():
 
 
 @app.route("/healthz")
-def get_healthz():
+def healthz():
     """ Get to health check """ 
     if start < time.time():
         return 'ok'
 
     return 'no'
 
+@app.route("/about")
+def about():
+    """ Get to health check """ 
+    return render_template('about.html')
 
 @app.route("/date")
-def get_date():
+def date():
     """ Get that return the date """
 
     return time.ctime()
 
 
 @app.route("/sleep")
-def get_sleep():
+def sleep():
     """ Trigger sleep time in secods"""
 
     return start_sleep(5)
 
 @app.route("/sleep/<num>")
-def get_sleep_num(num):
+def sleep_num(num):
 
     return start_sleep(num)
 
@@ -185,19 +189,19 @@ def start_sleep(num):
 
 
 @app.route("/error")
-def get_error():
+def error():
 
     return 'Error', 503
 
 
 @app.route("/version")
-def get_version():
+def version():
 
     return version
 
 
-@app.route("/forward", methods=['GET'])
-def get_forward():
+@app.route("/forward")
+def forward():
     service_type = request.args.get('type')
     host = request.args.get('host')
     port = request.args.get('port')
@@ -237,21 +241,26 @@ def prepare_outbound_headers(inbound_headers):
     return outbound_headers
 
 
-@app.route("/url")
-def check_url():
-    ''' TODO refactor Test HTTP connection '''
-    host = request.args.get('host')
-    port = request.args.get('port')
-    if port == None: 
-        port = 80
-    url = "http://{}:{}".format(str(host),str(port))
-    response = get_url_monitor(url, request)
-    status_code = response.status_code
-    if status_code == 200:
-        message = "Success response HTTP to {}:{} with status code {}".format(host, port, status_code)
-    else:
-        message = "Error response HTTP to {}:{} with status code {}".format(host, port, status_code)
-    return render_template('url-response.html', date=time.ctime(), message=message)
+@app.route("/url", methods=('GET', 'POST',))
+def url_check():
+    """ Check if url is reachable   """
+    message = "Please complete ip addres and port"
+
+    if request.method == 'POST':
+        url = request.form['url']
+        if not url or not validators.url(url):
+            flash('A complete url is required!. E.g. http://example.com', 'warning')
+        else:
+            response = get_url_monitor(url, request)
+            status_code = response.status_code
+            if status_code != 200:
+                message = "Error http connection: {}".format(url)
+                flash(message, 'error')
+            else:
+                message = "Successfull http connetion: {}".format(url)
+                flash(message, 'info')
+
+    return render_template('url.html', title="Check http connection")
 
 def get_url_monitor(url, request):
     try:
@@ -260,7 +269,7 @@ def get_url_monitor(url, request):
         after_request(response)
         return response
     except:
-        return response, version
+        return response
 
 # Prometheus metrics 
 HISTOGRAM = Histogram('quark_request_latency_seconds', 'Quark request latency', ['method', 'endpoint'])
@@ -276,9 +285,8 @@ def after_request(response):
 
 	return response
 
-
 @app.route("/logger/<num>")
-def get_logger(num):
+def logger(num):
     i = 0
     print("Date {} and waiting for {} seconds".format(time.ctime(), num))
     while(i <= int(num)):
