@@ -35,7 +35,7 @@ docker run --rm -d --name quark-server -p 8080:8080 gonzaloacosta/quark-server:v
 - [x] **Delete Post** `/<post_id>/delete`
 - [ ] **External DB Mongo**, for users.
 - [ ] **External Redis** for sessions
-- [ ] **Loging**, add loging web page
+- [ ] **Login**, add login web page
 
 ## Another funtionalities
 
